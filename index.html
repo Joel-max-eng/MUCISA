@@ -345,7 +345,7 @@
                                 <a href="#" class="d-block">
                                     <img src="images/icons/gdg.jpg" class="featured-block-image img-fluid" alt="">
         
-                                    <p class="featured-block-text"><strong>Google for Developers OnCampus. maseno University</strong></p>
+                                    <p class="featured-block-text"><strong>Google for Developers OnCampus. Maseno University</strong></p>
                                 </a>
                             </div>
                         </div>
@@ -367,7 +367,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-5 col-12 mx-auto">
-                            <form class="custom-form contact-form" id="contact-form">
+                        <form class="custom-form contact-form" id="contact-form">
     <h2>Contact form</h2>
 
     <p class="mb-4">Or, you can just send an email:
@@ -391,14 +391,9 @@
     <button type="submit" class="form-control">Send Message</button>
 </form>
 
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script>
-    (function() {
-        emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS Public Key
-    })();
-
     document.getElementById("contact-form").addEventListener("submit", function(event) {
-        event.preventDefault(); // Prevent form from reloading the page
+        event.preventDefault(); // Prevent form submission
 
         // Get form values
         const firstName = document.getElementById("first-name").value;
@@ -406,23 +401,14 @@
         const email = document.getElementById("email").value;
         const message = document.getElementById("message").value;
 
-        // Prepare email data
-        const templateParams = {
-            first_name: firstName,
-            last_name: lastName,
-            email: email,
-            message: message
-        };
+        // Construct the mailto URL
+        const mailtoLink = `https://mail.google.com/mail/?view=cm&to=mucisa.masenosci@gmail.com&su=Message from ${firstName} ${lastName}&body=${encodeURIComponent(message + "\n\nReply to: " + email)}`;
 
-        // Send email using EmailJS
-        emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
-            .then(function(response) {
-                alert("Message sent successfully!");
-            }, function(error) {
-                alert("Failed to send message. Please try again later.");
-            });
+        // Open Gmail in a new tab
+        window.open(mailtoLink, "_blank");
     });
 </script>
+
 
                         </div>
 
