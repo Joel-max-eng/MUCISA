@@ -345,7 +345,7 @@
                                 <a href="#" class="d-block">
                                     <img src="images/icons/gdg.jpg" class="featured-block-image img-fluid" alt="">
         
-                                    <p class="featured-block-text"><strong>Google for Developers on Campus. maseno University</strong></p>
+                                    <p class="featured-block-text"><strong>Google for Developers OnCampus. maseno University</strong></p>
                                 </a>
                             </div>
                         </div>
@@ -367,28 +367,63 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-5 col-12 mx-auto">
-                            <form class="custom-form contact-form" action="#" method="post" role="form">
-                                <h2>Contact form</h2>
+                            <form class="custom-form contact-form" id="contact-form">
+    <h2>Contact form</h2>
 
-                                <p class="mb-4">Or, you can just send an email:
-                                    <a href="mucisa.masenosci@gmail.com">mucisa.masenosci@gmail.com</a>
-                                </p>
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-12">
-                                        <input type="text" name="first-name" id="first-name" class="form-control" placeholder="First Name" required>
-                                    </div>
+    <p class="mb-4">Or, you can just send an email:
+        <a href="mailto:mucisa.masenosci@gmail.com">mucisa.masenosci@gmail.com</a>
+    </p>
 
-                                    <div class="col-lg-6 col-md-6 col-12">
-                                        <input type="text" name="last-name" id="last-name" class="form-control" placeholder="Last Name" required>
-                                    </div>
-                                </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-12">
+            <input type="text" name="first-name" id="first-name" class="form-control" placeholder="First Name" required>
+        </div>
 
-                                <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="your email" required>
+        <div class="col-lg-6 col-md-6 col-12">
+            <input type="text" name="last-name" id="last-name" class="form-control" placeholder="Last Name" required>
+        </div>
+    </div>
 
-                                <textarea name="message" rows="5" class="form-control" id="message" placeholder="Your Message to Us."></textarea>
+    <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Your email" required>
 
-                                <button type="submit" class="form-control">Send Message</button>
-                            </form>
+    <textarea name="message" rows="5" class="form-control" id="message" placeholder="Your Message to Us." required></textarea>
+
+    <button type="submit" class="form-control">Send Message</button>
+</form>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+    (function() {
+        emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS Public Key
+    })();
+
+    document.getElementById("contact-form").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent form from reloading the page
+
+        // Get form values
+        const firstName = document.getElementById("first-name").value;
+        const lastName = document.getElementById("last-name").value;
+        const email = document.getElementById("email").value;
+        const message = document.getElementById("message").value;
+
+        // Prepare email data
+        const templateParams = {
+            first_name: firstName,
+            last_name: lastName,
+            email: email,
+            message: message
+        };
+
+        // Send email using EmailJS
+        emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
+            .then(function(response) {
+                alert("Message sent successfully!");
+            }, function(error) {
+                alert("Failed to send message. Please try again later.");
+            });
+    });
+</script>
+
                         </div>
 
                     </div>
